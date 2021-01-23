@@ -30,8 +30,8 @@ function plus(e){
     console.log(x,y,mouseX,mouseY);
     boxX = mouseX;
     boxY = mouseY;
-    if(boxX<x&&x<boxX+30){
-        if(boxY<y&&y<boxY+120){
+    if(boxX-20<x&&x<boxX+30){
+        if(boxY-20<y&&y<boxY+120){
             moveX = moveX*-1;
             ctx.strokeStyle="green"
         }
@@ -53,7 +53,6 @@ function plus(e){
 function move(e){
     mouseX = e.offsetX;
      mouseY = e.offsetY;
-     console.log("hey")
 }
 
 function paintR(){
