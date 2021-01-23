@@ -11,6 +11,12 @@ let moveY = 1;
 let boxX = 50;
 let boxY = 50;
 
+let mouseDown = false;
+
+let mouseX
+let mouseY
+let mouseM = false;
+
 function paint(){
     console.log(x,y);
     ctx.clearRect(0,0,canvas.width,canvas.height);
@@ -21,8 +27,6 @@ function paint(){
 }
 
 function plus(e){
-    const mouseX = e.offsetX;
-    const mouseY = e.offsetY;
     console.log(x,y,mouseX,mouseY);
     boxX = mouseX;
     boxY = mouseY;
@@ -47,20 +51,31 @@ function plus(e){
 }
 
 function move(e){
-    const mouseX = e.offsetX;
-    console.log(`${mouseX}sadasds`);
+    mouseX = e.offsetX;
+     mouseY = e.offsetY;
+     console.log("hey")
 }
 
 function paintR(){
     ctx.fillRect(50,50,10,100);
 }
 
+function down(e){
+    mouseDown = true;
+}
+
+function up(e){
+    mouseDown = false;
+}
+
 function init(){
     paint();
     paintR();
     canvas.addEventListener("mousemove", function (e) { plus(e) });
-    requestAnimationFrame(plus);
-    
+    canvas.addEventListener("mousemove", function (e) { move(e) });
+    canvas.addEventListener("mousedown",function (e) { down(e) });
+    canvas.addEventListener("mouseup",function (e) { up(e) });
+    setInterval(plus,1)
 }
 
 init();
