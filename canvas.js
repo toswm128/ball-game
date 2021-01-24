@@ -28,7 +28,7 @@ function paint(){
 
 function plus(e){
     console.log(x,y,mouseX,mouseY);
-    boxX = mouseX;
+    
     boxY = mouseY;
     if(boxX-20<x&&x<boxX+30){
         if(boxY-20<y&&y<boxY+120){
