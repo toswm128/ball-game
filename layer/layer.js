@@ -5,8 +5,15 @@ pen.width = 720;
 pen.height = 420;
 body.appendChild(pen);
 const canvas = document.querySelector("canvas");
-const ctx = canvas.getContext("2d");
+const ptx = pen.getContext("2d");
 
+
+
+let layer = [];
+let layId=0;
+
+layer[layId] = document.querySelector("canvas");
+const ctx = layer[layId].getContext("2d");
 
 let startX;
 let startY;
@@ -17,14 +24,34 @@ let mouseY;
 let drawing = false;
 
 function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
     ctx.beginPath();
     ctx.moveTo(startX, startY);
     ctx.lineTo(mouseX, mouseY);
     ctx.stroke();
+    ptx.beginPath();
+    ptx.moveTo(startX, startY);
+    ptx.lineTo(mouseX, mouseY);
+    ptx.stroke();
+}
+
+function makeLay(){
+    init();
+    layer[layId] = document.createElement("canvas");
+    layer[layId].id = 1;
+    layer[layId].width = 720;
+    layer[layId].height = 420;
+    body.appendChild(layer[layId])
 }
 
 function up(e){
     drawing = false;
+    layId++;
+    const lay ={
+        id:layId
+    }
+    layer.push(lay);
+    makeLay();
 }
 
 function down(e) {
@@ -37,15 +64,16 @@ function move(e){
     mouseX = e.offsetX;
     mouseY = e.offsetY;
     draw();
-    startX = mouseX; startY = mouseY;
+    
     console.log("hey")
 }
 
 function init(){
-    
-    pen.addEventListener("mousemove", function (e) { move(e) });
-    pen.addEventListener("mousedown",function (e) { down(e) });
-    pen.addEventListener("mouseup",function (e) { up(e) });
+    layer[layId] = document.querySelector("canvas");
+    const ctx = layer[layId].getContext("2d");
+    layer[layId].addEventListener("mousemove", function (e) { move(e) });
+    layer[layId].addEventListener("mousedown",function (e) { down(e) });
+    layer[layId].addEventListener("mouseup",function (e) { up(e) });
 }
 
 init();
