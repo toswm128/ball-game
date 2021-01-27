@@ -70,7 +70,7 @@ function up(e){
 function init(){
     paint();
     paintR();
-    canvas.addEventListener("mousemove", function (e) { plus(e) });
+
     canvas.addEventListener("mousemove", function (e) { move(e) });
     canvas.addEventListener("mousedown",function (e) { down(e) });
     canvas.addEventListener("mouseup",function (e) { up(e) });
